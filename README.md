@@ -1,5 +1,5 @@
-           # Myntra
-A full-stack Amazon clone built with React.js, Tailwind CSS, Node.js, Express, and MongoDB. This project replicates key features of the Amazon website, including authentication, shopping cart, and order management.
+# # MyntraApp Project
+Clone built with React.js, Tailwind CSS, Node.js, Express, and MongoDB. This project replicates key features of the Myntra website, including authentication, shopping cart, and order management.
 
 ## Features
 
@@ -8,19 +8,12 @@ A full-stack Amazon clone built with React.js, Tailwind CSS, Node.js, Express, a
 * Order Management: View order history.
 * Responsive Design: Fully responsive layout using Tailwind CSS.
 
-## Tech Stack
-
-* Frontend: React.js, Tailwind CSS, Redux Toolkit, MUI
-* Backend: Node Js, Express js, JWT Authentication
-* API: Integrated with the https://fakestoreapi.com/ for product data
-
 ## Installation
 
 1. Clone the repository:
-   
+   * https://github.com/garima691wiz/MyntraApp-Project.git
 
-2. Install all dependencies for both frontend and 
-   * cd amazon_frontend
+2. Install all dependencies  
    * npm install
  
 
