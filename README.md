@@ -1,5 +1,4 @@
-# Amazon Clone
-
+# Distict App
 A full-stack Amazon clone built with React.js, Tailwind CSS, Node.js, Express, and MongoDB. This project replicates key features of the Amazon website, including authentication, shopping cart, and order management.
 
 ## Features
