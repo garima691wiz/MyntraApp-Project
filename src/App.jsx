@@ -16,6 +16,7 @@ import CartPage from "./pages/CartPage/CartPage.jsx";
 import OrdersPage from "./pages/Orders/OrdersPage.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import OrderSummaryPage from "./pages/OrderSummaryPage/OrderSummaryPage.jsx";
+import ProductCard from "./components/Product/ProductCard.jsx";
 
 
 const Layout = () => {
@@ -39,7 +40,7 @@ const App = () => {
         <Route path="/cart" element={<CartPage />}></Route>
         <Route path="/order" element={<OrdersPage />}></Route>
         <Route path="/ordersummary" element={<OrderSummaryPage />}></Route>
-
+        <Route path="/products" element={<ProductCard/>}></Route>
         <Route
           path="/product/:id"
           element={<ProductDetail />}

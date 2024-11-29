@@ -9,12 +9,12 @@ import {
   resetCart,
   increaseQuantity,
   decreaseQuantity,
-} from "../../redux/distinctSlice";
+} from "../../redux/MyntraSlice";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const product = useSelector((state) => state.distinctReducer.products);
-  const userInfo = useSelector((state) => state.distinctReducer.userInfo);
+  const product = useSelector((state) => state.MyntraReducer.products);
+  const userInfo = useSelector((state) => state.MyntraReducer.userInfo);
 
   const userId = userInfo?.data?.user?._id;
 
@@ -84,7 +84,7 @@ const CartPage = () => {
                         >
                           -
                         </p>
-                        <p className="font-titleFont text-base font-semibold text-distinct_blue">
+                        <p className="font-titleFont text-base font-semibold text-myntra_blue">
                           {item.quantity}
                         </p>
                         <p
@@ -138,7 +138,7 @@ const CartPage = () => {
               </div>
               <button
                 onClick={handleProceed}
-                className="w-full font-titleFont font-medium text-base bg-gradient-to-tr from-yellow-400 to-yellow-200 border hover:from-yellow-300 hover:to-yellow-400 border-yellow-500 hover:border-yellow-700 active:bg-gradient-to-bl active:from-yellow-400 active:to-yellow-500 duration-200 py-1.5 rounded-md mt-3"
+                className="w-full font-titleFont font-medium text-base bg-gradient-to-tr from-pinkto-yellow-200 border hover:from-yellow-300 hover:to-yellow-400 border-yellow-500 hover:border-yellow-700 active:bg-gradient-to-bl active:from-yellow-400 active:to-yellow-500 duration-200 py-1.5 rounded-md mt-3"
               >
                 Proceed to Buy
               </button>

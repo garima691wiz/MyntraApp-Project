@@ -1,0 +1,50 @@
+/* Wrapper for the footer content */
+.footer-container {
+    background-color: #f9f9f9; /* Light grey background */
+    padding: 40px 20px; /* Padding for proper spacing */
+    border-top: 1px solid #ddd; /* Subtle border for separation */
+    font-family: 'Roboto', sans-serif; /* Modern, clean font */
+  }
+  
+  /* Footer Typography Styling */
+  .footer-container .footer-typography {
+    color: #666; /* Grey color for text */
+    line-height: 1.6; /* Better line spacing for readability */
+    margin-bottom: 20px; /* Space between paragraphs */
+  }
+  
+  /* Footer List Styling (if used for points) */
+  .footer-container .footer-list {
+    margin-left: 20px; /* Indentation for list items */
+    padding-left: 0;
+  }
+  
+  .footer-container .footer-list li {
+    list-style: decimal; /* Numbered list */
+    margin-bottom: 10px; /* Space between list items */
+    color: #333; /* Darker color for list text */
+  }
+  
+  /* Footer Title Styling */
+  .footer-container h6 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Darker text for headings */
+    margin-bottom: 16px; /* Spacing under headings */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-container {
+      padding: 20px 10px;
+    }
+  
+    .footer-container h6 {
+      font-size: 14px;
+    }
+  
+    .footer-container .footer-typography {
+      font-size: 14px;
+    }
+  }
+  

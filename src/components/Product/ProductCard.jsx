@@ -3,7 +3,7 @@ import StarIcon from "@mui/icons-material/Star";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/distinctSlice";
+import { addToCart } from "../../redux/MyntraSlice";
 
 const ProductCard = () => {
   
@@ -13,7 +13,7 @@ const ProductCard = () => {
 
   const dispatch = useDispatch();
 
-  const searchTerm = useSelector((state) => state.distinctReducer.searchTerm);
+  const searchTerm = useSelector((state) => state.MyntraReducer.searchTerm);
 
   const filteredProducts = productsData.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useLoaderData } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { addToCart } from "../../redux/distinctSlice";
+import { addToCart } from "../../redux/MyntraSlice";
 
 const ProductDetail = () => {
   const { id } = useParams();  // Getting the product id from the URL

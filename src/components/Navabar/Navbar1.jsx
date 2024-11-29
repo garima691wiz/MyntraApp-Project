@@ -1,79 +1,101 @@
-import React, { useState } from "react";
-import distinctLogo from "../../assets/distinct.gif"; // Use the distinct logo image
+import  { useState } from "react";
+import myntraLogo from "../../assets/Myntra-Logo.png"; // Use the Myntra logo image
 import SearchIcon from "@mui/icons-material/Search";
-import CartIcon from "@mui/icons-material/ProductionQuantityLimits";
+import { IoBagOutline } from "react-icons/io5";
+import { CiHeart } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setSearchTerm } from "../../redux/distinctSlice";
+import { setSearchTerm } from "../../redux/MyntraSlice";
+import { IoPersonOutline } from "react-icons/io5";
 
 const Navbar1 = () => {
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
-  const products = useSelector((state) => state.distinctReducer.products);
-  const userInfo = useSelector((state) => state.distinctReducer.userInfo);
+  const products = useSelector((state) => state.MyntraReducer.products);
+  const userInfo = useSelector((state) => state.MyntraReducer.userInfo);
 
   const handleSearch = () => {
     dispatch(setSearchTerm(searchInput));
   };
 
   return (
-    <nav className="w-full h-[80px] bg-gradient-to-r from-[#0b0b0b] to-[#1c1c1c] flex items-center justify-between px-8 py-4 shadow-md">
-      {/* Logo */}
-      <Link to="/" className="flex items-center">
-        <img
-          src={distinctLogo}
-          alt="distinct-logo"
-          className="h-12 w-auto transform hover:scale-105 transition duration-300"
-        />
-      </Link>
-
-      {/* Search Bar */}
-      <div className="flex items-center w-full max-w-[500px] relative">
-        <input
-          type="text"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          className="w-full p-3 pl-5 rounded-full bg-[#2a2a2a] text-white placeholder-gray-400 border-none focus:outline-none focus:ring-2 focus:ring-[#f1c40f] transition duration-300"
-          placeholder="Search for products..."
-        />
-        <button
-          onClick={handleSearch}
-          className="absolute right-0 bg-[#f1c40f] p-3 rounded-full hover:bg-[#d4a017] transition duration-300 shadow-md"
-        >
-          <SearchIcon className="text-black" />
-        </button>
-      </div>
-
-      {/* User Info and Cart */}
-      <div className="flex items-center gap-8 text-white">
-        {/* User Info */}
-        <Link
-          to="/signin"
-          className="flex items-center hover:text-[#f1c40f] transition duration-300"
-        >
-          <p className="text-sm font-medium tracking-wide">
-            Hello, {userInfo?.data?.user?.name || "Sign in"}
-          </p>
+    <header className="sticky top-0 z-50 w-full bg-white shadow-md">
+      <nav className="flex items-center justify-between px-6 py-3">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img
+            src={myntraLogo}
+            alt="Myntra Logo"
+            className="h-20 w-auto transform hover:scale-105 transition duration-300"
+          />
         </Link>
 
-        {/* Orders */}
-        <Link
-          to="/order"
-          className="text-sm font-medium tracking-wide hover:text-[#f1c40f] transition duration-300"
-        >
-          Orders
-        </Link>
+        {/* Navigation Links */}
+        <ul className="hidden md:flex gap-6 text-sm font-medium text-gray-800">
+     
+           <li>Men</li> 
+           <li> Women</li> 
+           <li>Kids</li> 
+           <li>Home & Living</li> 
+           <li>Beauty</li> 
+           
+          
+            
+          
+            
+          
+            
+         
+        </ul>
 
-        {/* Cart */}
-        <Link to="/cart" className="relative flex items-center hover:text-[#f1c40f] transition duration-300">
-          <CartIcon className="text-3xl" />
-          <span className="absolute top-[-6px] left-[18px] text-xs bg-[#f1c40f] text-black rounded-full w-5 h-5 flex items-center justify-center font-semibold">
-            {products.length > 0 ? products.length : 0}
-          </span>
-          <p className="ml-2 text-sm font-medium tracking-wide">Cart</p>
-        </Link>
-      </div>
-    </nav>
+        {/* Search Bar */}
+        <div className="relative flex items-center max-w-[400px] w-full">
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-600"
+            placeholder="Search for products, brands, and more..."
+          />
+          <button
+            onClick={handleSearch}
+            className="absolute right-2 bg-pink-600 p-2 rounded-full text-white hover:bg-pink-700 transition"
+          >
+            <SearchIcon />
+          </button>
+        </div>
+
+        {/* User Info and Cart */}
+        <div className="flex items-center gap-6 text-gray-800">
+          {/* User Profile */}
+          <Link
+            to="/signin"
+            className="flex items-center gap-1 hover:text-pink-600 transition"
+          >
+            <div><IoPersonOutline size={30} style={{ color: "black" }} />Profile</div>
+            <span className="text-sm font-medium">
+              {userInfo?.data?.user?.name || ""}
+              
+            </span>
+          </Link>
+
+          {/* Cart */}
+          <Link
+            to="/cart"
+            className="relative flex items-center hover:text-pink-600 transition"
+          >
+              <div>  <CiHeart size={30} style={{ color: "black" }} />WishList</div>
+            <span className="absolute -top-1 -right-3 text-xs bg-pink-600 text-white rounded-full px-2 py-0.5 font-bold">
+              {products.length > 0 ? products.length : 0|| "WishList"}
+            </span>
+          </Link>
+        <div>
+          <IoBagOutline size={30} style={{ color: "black" }} />
+          Bag
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 };
 

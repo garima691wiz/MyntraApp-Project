@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import distinctReducer from "../redux/distinctSlice";
+import MyntraReducer from "../redux/MyntraSlice";
 import {
   persistStore,
   persistReducer,
@@ -18,10 +18,10 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, distinctReducer);
+const persistedReducer = persistReducer(persistConfig, MyntraReducer);
 
 export const store = configureStore({
-  reducer: { distinctReducer: persistedReducer },
+  reducer: { MyntraReducer: persistedReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

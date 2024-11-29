@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { sendCartData } from "../../api/api-helpers";
-import { resetCart } from "../../redux/distinctSlice";
+import { resetCart } from "../../redux/MyntraSlice";
 import { motion } from "framer-motion";
 
 const OrderSummaryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.distinctReducer.products);
-  const userInfo = useSelector((state) => state.distinctReducer.userInfo);
+  const product = useSelector((state) => state.MyntraReducer.products);
+  const userInfo = useSelector((state) => state.MyntraReducer.userInfo);
 
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");

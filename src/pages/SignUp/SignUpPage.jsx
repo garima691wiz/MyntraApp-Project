@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/distinct.gif";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import Logo from "../../assets/Myntra-Logo.png";
 import { useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { motion } from "framer-motion";
@@ -12,37 +11,16 @@ const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
-  const [loading, setLoading] = useState();
-  const [successMsg, setSuccessMsg] = useState();
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
-  // Error check
+  // Form Error States
   const [nameErr, setNameErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [reEntPasswordErr, setReEntPasswordErr] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleName = (e) => {
-    setName(e.target.value);
-    setNameErr("");
-  };
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    setEmailErr("");
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    setPasswordErr("");
-  };
-
-  const handleRePassword = (e) => {
-    setReenterPassword(e.target.value);
-    setReEntPasswordErr("");
-  };
-
-  //Email Validation
   const validEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -54,193 +32,154 @@ const SignUpPage = () => {
     setErrorMsg("");
     setSuccessMsg("");
 
-    if (!name) {
-      setNameErr("Enter your name");
-    }
+    // Validation
+    if (!name) setNameErr("Enter your name");
+    if (!email) setEmailErr("Enter your email");
+    else if (!validEmail(email)) setEmailErr("Enter a valid email");
 
-    if (!email) {
-      setEmailErr("Enter your email");
-    } else if (!validEmail(email)) {
-      setEmailErr("Enter a valid email");
-    }
+    if (!password) setPasswordErr("Enter your password");
+    else if (password.length < 6) setPasswordErr("Password must be at least 6 characters");
 
-    if (!password) {
-      setPasswordErr("Enter your password");
-    } else if (password.length < 6) {
-      setPasswordErr("Passwords must be at least 6 characters");
-    }
+    if (!reenterPassword) setReEntPasswordErr("Confirm your password");
+    else if (reenterPassword !== password) setReEntPasswordErr("Passwords do not match");
 
-    if (!reenterPassword) {
-      setReEntPasswordErr("Confirm your password");
-    } else if (reenterPassword !== password) {
-      setReEntPasswordErr("Password not matched");
-    }
-
-    //If all fields have value
     if (
       name &&
       email &&
-      validEmail &&
+      validEmail(email) &&
       password &&
       password.length >= 6 &&
-      reenterPassword &&
       reenterPassword === password
     ) {
       setLoading(true);
-
       const data = { name, email, password };
       const response = await sendUserAuthReq(data);
-
       setLoading(false);
 
       if (response.error) {
-        setErrorMsg(response.error); // Display the error message if registration fails
+        setErrorMsg(response.error);
         setSuccessMsg("");
       } else {
         setSuccessMsg("User registered successfully!");
         navigate("/signin");
-
-        setErrorMsg("");
       }
     }
   };
+
   return (
-    <div className="w-full">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
-        className="w-[370px] mx-auto flex flex-col items-center my-5"
+        className="w-[360px] bg-white shadow-lg p-6 rounded-md"
         onSubmit={handleContinue}
       >
         <Link to="/">
-          <img className="w-24 mb-2" src={Logo} alt="walmartLogo" />
+          <img className="w-28 mx-auto mb-6" src={Logo} alt="Myntra Logo" />
         </Link>
 
-        <div className="w-full border border-zinc-300 p-6">
-          <h2 className="flex text-2xl font-medium mb-4">Create Account</h2>
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium">Your name</p>
-              <input
-                value={name}
-                onChange={handleName}
-                type="text"
-                className="w-full py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] duration-100"
-              />
-              {nameErr && (
-                <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
-                  <span className="italic font-extrabold text-base">!</span>
-                  {nameErr}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium">Email or Phone number</p>
-              <input
-                value={email}
-                onChange={handleEmail}
-                type="email"
-                className="w-full lowercase py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600]  duration-100"
-              />
-              {emailErr && (
-                <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
-                  <span className="italic font-extrabold text-base">!</span>
-                  {emailErr}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium">Password</p>
-              <input
-                value={password}
-                onChange={handlePassword}
-                type="password"
-                className="w-full py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] duration-100"
-              />
-              {passwordErr && (
-                <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
-                  <span className="italic font-extrabold text-base">!</span>
-                  {passwordErr}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium">Re-enter Password</p>
-              <input
-                value={reenterPassword}
-                onChange={handleRePassword}
-                type="password"
-                className="w-full py-1 border border-zinc-400 px-2 text-base rounded-sm outline-none focus-within:border-[#e77600] focus-within:shadow-amazonInput duration-100"
-              />
-              {reEntPasswordErr && (
-                <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
-                  <span className="italic font-extrabold text-base">!</span>
-                  {reEntPasswordErr}
-                </p>
-              )}
-            </div>
-            <button className="w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#dcbc1a] to-[#ffe771] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 t">
-              Continue
-            </button>
-            {/* Loader Spinner implement here */}
-            {loading && (
-              <div>
-                <RotatingLines
-                  className="flex justify-center"
-                  visible={true}
-                  height="50"
-                  width="50"
-                  color="blue"
-                  strokeWidth="5"
-                  animationDuration="0.75"
-                  ariaLabel="rotating-lines-loading"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                />
-              </div>
-            )}
-            {errorMsg && (
-              <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
-                <span className="italic font-extrabold text-base">!</span>
-                {errorMsg}
-              </p>
-            )}
-            {successMsg && (
-              <div>
-                <motion.p
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-base font-titleFont font-semibold text-green-500 border-[1px] border-green-700 px-2 text-center "
-                >
-                  {successMsg}
-                </motion.p>
-              </div>
-            )}
+        <h2 className="text-xl font-semibold text-center mb-4">Create Account</h2>
+
+        <div className="flex flex-col gap-4">
+          {/* Name Input */}
+          <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">Your Name</label>
+            <input
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                setNameErr("");
+              }}
+              type="text"
+              className="border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            />
+            {nameErr && <p className="text-red-600 text-sm mt-1">{nameErr}</p>}
           </div>
-          <p className="text-xs text-black leading-4 mt-4">
-            By Continuing, you agree to Distinct{" "}
-            <span className="text-blue-600">Conditions of Use </span>and{" "}
-            <span className="text-blue-600">Privace Notice.</span>
-          </p>
-          <div>
-            <p className="text-xs text-black">
-              Already have an account?{" "}
-              <Link to="/signin">
-                <span className="text-xs text-blue-600 hover:text-orange-600 hover:underline underline-offset-1 cursor-pointer duration-100">
-                  Sign in{" "}
-                  <span>
-                    <ArrowRightIcon />
-                  </span>
-                </span>
-              </Link>
-            </p>
-            <p className="text-xs text-black -mt-2">
-              Buying for work?{" "}
-              <span className="text-xs text-blue-600 hover:text-orange-600 hover:underline underline-offset-1 cursor-pointer duration-100">
-                Create a free business account
-              </span>
-            </p>
+
+          {/* Email Input */}
+          <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">Email</label>
+            <input
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailErr("");
+              }}
+              type="email"
+              className="border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            />
+            {emailErr && <p className="text-red-600 text-sm mt-1">{emailErr}</p>}
+          </div>
+
+          {/* Password Input */}
+          <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">Password</label>
+            <input
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPasswordErr("");
+              }}
+              type="password"
+              className="border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            />
+            {passwordErr && <p className="text-red-600 text-sm mt-1">{passwordErr}</p>}
+          </div>
+
+          {/* Confirm Password Input */}
+          <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">Re-enter Password</label>
+            <input
+              value={reenterPassword}
+              onChange={(e) => {
+                setReenterPassword(e.target.value);
+                setReEntPasswordErr("");
+              }}
+              type="password"
+              className="border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            />
+            {reEntPasswordErr && (
+              <p className="text-red-600 text-sm mt-1">{reEntPasswordErr}</p>
+            )}
           </div>
         </div>
+
+        {/* Continue Button */}
+        <button
+          type="submit"
+          className="w-full bg-pink-500 text-white py-2 rounded mt-4 hover:bg-pink-600"
+        >
+          {loading ? (
+            <RotatingLines
+              visible={true}
+              height="20"
+              width="20"
+              strokeWidth="5"
+              color="white"
+              ariaLabel="loading"
+            />
+          ) : (
+            "Continue"
+          )}
+        </button>
+
+        {/* Error & Success Messages */}
+        {errorMsg && (
+          <p className="text-red-600 text-sm mt-4 text-center">{errorMsg}</p>
+        )}
+        {successMsg && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-green-600 text-sm mt-4 text-center"
+          >
+            {successMsg}
+          </motion.p>
+        )}
+
+        <p className="text-sm text-gray-600 mt-4 text-center">
+          By continuing, you agree to Myntra's{" "}
+          <span className="text-blue-500 cursor-pointer">Terms of Use</span> and{" "}
+          <span className="text-blue-500 cursor-pointer">Privacy Policy</span>.
+        </p>
       </form>
     </div>
   );
