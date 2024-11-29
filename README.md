@@ -1,4 +1,4 @@
-# # MyntraApp Project
+## MyntraApp Project
 Clone built with React.js, Tailwind CSS, Node.js, Express, and MongoDB. This project replicates key features of the Myntra website, including authentication, shopping cart, and order management.
 
 ## Features
@@ -20,7 +20,8 @@ Clone built with React.js, Tailwind CSS, Node.js, Express, and MongoDB. This pro
 4. Start the development server for both frontend and backend:
    * npm run dev
   
-  
+  Deployment link
+  https://mntra.netlify.app
 
   ## Contact :-
 On email:
