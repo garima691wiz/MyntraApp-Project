@@ -1,5 +1,5 @@
 ## MyntraApp Project
-Clone built with React.js, Tailwind CSS, Node.js, Express, and MongoDB. This project replicates key features of the Myntra website, including authentication, shopping cart, and order management.
+Clone built with React.js, Tailwind CSS, Node.js.
 
 ## Features
 
