@@ -3,7 +3,6 @@ Clone built with React.js, Tailwind CSS, Node.js, Express, and MongoDB. This pro
 
 ## Features
 
-* User Authentication: Sign up, login and logout functionality with JWT
 * Shoping Cart: Add and remove products from the cart, with real time updates.
 * Order Management: View order history.
 * Responsive Design: Fully responsive layout using Tailwind CSS.
